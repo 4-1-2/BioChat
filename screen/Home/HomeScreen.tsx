@@ -2,8 +2,8 @@
 import * as React from "react";
 import { View, Image, TouchableOpacity, Text } from "react-native";
 
-import styles from "./styles";
 import { BOT_GREEN } from "../../assets";
+import styles from "./styles";
 
 export default function HomeScren({ navigation }) {
   const onPressButton = () => {

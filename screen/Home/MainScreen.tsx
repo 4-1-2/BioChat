@@ -7,6 +7,25 @@ import { sendInfo } from "../../resources";
 import styles from "./styles";
 import { DEFAULT } from "../../assets";
 
+declare type ImagePickerResult =
+  | {
+      cancelled: true;
+    }
+  | ({
+      cancelled: false;
+    } & ImageInfo);
+
+declare type ImageInfo = {
+  uri: string;
+  width: number;
+  height: number;
+  type?: "image" | "video";
+  exif?: {
+    [key: string]: any;
+  };
+  base64?: string;
+};
+
 export default function MainScren({ navigation, route }) {
   const { params } = route;
   const [image, setImage] = useState(null);
@@ -31,8 +50,9 @@ export default function MainScren({ navigation, route }) {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
-      setBase64(result.base64);
+      const { uri, base64 } = result as ImageInfo;
+      setImage(uri);
+      setBase64(base64);
     }
   };
 
@@ -52,8 +72,9 @@ export default function MainScren({ navigation, route }) {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
-      setBase64(result.base64);
+      const { uri, base64 } = result as ImageInfo;
+      setImage(uri);
+      setBase64(base64);
     }
   };
 
