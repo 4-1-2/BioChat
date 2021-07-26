@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { View, Image, TouchableOpacity, Text, Dimensions } from "react-native";
 
 import * as ImagePicker from "expo-image-picker";
+import ImageEditor from "@react-native-community/image-editor";
 
 import { sendInfo } from "../../resources";
 import styles from "./styles";
-import { DEFAULT } from "../../assets";
+import { EXAMPLE, LOGO_HOR } from "../../assets";
 
 declare type ImagePickerResult =
   | {
@@ -38,18 +39,37 @@ export default function MainScren({ navigation, route }) {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your photos!");
+      alert("You've refused to allow this app to access your photos!");
       return;
     }
 
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 4],
       base64: true,
+      options: {
+        maxWidth: 256,
+        maxHeight: 256,
+      },
     });
 
     if (!result.cancelled) {
+      // let resizedUri = await new Promise((resolve, reject) => {
+      //   ImageEditor.cropImage(
+      //     result.uri,
+      //     {
+      //       offset: { x: 0, y: 0 },
+      //       size: { width: result.width, height: result.height },
+      //       displaySize: { width: 256, height: 256 },
+      //       resizeMode: "contain",
+      //     },
+      //     (uri) => resolve(uri),
+      //     () => reject()
+      //   );
+      // });
+      // console.log(resizedUri);
+
       const { uri, base64 } = result as ImageInfo;
       setImage(uri);
       setBase64(base64);
@@ -65,7 +85,7 @@ export default function MainScren({ navigation, route }) {
     }
 
     const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 4],
       base64: true,
@@ -79,23 +99,30 @@ export default function MainScren({ navigation, route }) {
   };
 
   const sendData = async () => {
-    const data = { image: base64 };
-    // TODO crash endpoint call
-    //  const response = await sendInfo(data);
-    const response = {
-      plant: "Apple",
-      diagnosis: "Fungus diseases in plants.",
-      question: "Tell me about fungus diseases in plants",
-    };
-    // if (response) {
-    navigation.navigate("Report", { data: response, image: image });
-    // }
+    const response = await sendInfo({ img: base64 });
+    console.log(response);
+    if (response.plant) {
+      const data = {
+        plant: response.plant,
+        diagnosis: response.disease,
+        question: response.suggested_question,
+      };
+      navigation.navigate("Report", { data, image: image });
+    } else {
+      alert("Ocurrió un error.");
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.containerTitle}>
-        <Text style={styles.title}>BioChat</Text>
+        <Image
+          source={LOGO_HOR}
+          style={{
+            width: 140,
+            height: 40,
+          }}
+        />
       </View>
       <View style={styles.containerImage}>
         {image && (
@@ -109,7 +136,7 @@ export default function MainScren({ navigation, route }) {
         )}
         {!image && (
           <Image
-            source={DEFAULT}
+            source={EXAMPLE}
             style={{
               width: dimensions.width - 20,
               height: dimensions.width - 20,
@@ -122,13 +149,17 @@ export default function MainScren({ navigation, route }) {
           onPress={openCamera}
           style={[styles.button, styles.buttonSecondary]}
         >
-          <Text style={[styles.buttonText, styles.textSecondary]}>Cámara</Text>
+          <Text style={[styles.buttonText, styles.textSecondary]}>
+            Take a photo
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={showImagePicker}
           style={[styles.button, styles.buttonSecondary]}
         >
-          <Text style={[styles.buttonText, styles.textSecondary]}>Galería</Text>
+          <Text style={[styles.buttonText, styles.textSecondary]}>
+            Choose image
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.containerSend}>
@@ -137,7 +168,7 @@ export default function MainScren({ navigation, route }) {
           style={[styles.button, styles.buttonPrimary]}
           disabled={!image}
         >
-          <Text style={[styles.buttonText, styles.textPrimary]}>Enviar</Text>
+          <Text style={[styles.buttonText, styles.textPrimary]}>Send</Text>
         </TouchableOpacity>
       </View>
     </View>

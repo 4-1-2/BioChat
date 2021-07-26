@@ -19,7 +19,7 @@ export default function HomeScren({ navigation }) {
           onPress={onPressButton}
           style={[styles.button, styles.buttonSecondary]}
         >
-          <Text style={[styles.buttonText, styles.textSecondary]}>Iniciar</Text>
+          <Text style={[styles.buttonText, styles.textSecondary]}>Welcome</Text>
         </TouchableOpacity>
 
         {/* <TouchableOpacity

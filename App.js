@@ -7,6 +7,7 @@ import HomeScreen from "./screen/Home/HomeScreen";
 import MainScren from "./screen/Home/MainScreen";
 import ChatScren from "./screen/Home/ChatScreen";
 import ReportScren from "./screen/Home/ReportScreen";
+import ProfileScren from "./screen/Home/Profile";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
 
         <Stack.Screen name="Chat" component={ChatScren} />
         <Stack.Screen name="Report" component={ReportScren} />
+        <Stack.Screen name="Profile" component={ProfileScren} />
       </Stack.Navigator>
     </NavigationContainer>
   );

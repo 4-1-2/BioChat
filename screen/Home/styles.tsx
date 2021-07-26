@@ -1,4 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const SLIDER_WIDTH = Dimensions.get("window").width + 80;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 export default StyleSheet.create({
   containerHome: {
@@ -13,9 +16,11 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   containerChat: {
-    alignItems: "center",
+    alignItems: "flex-start",
+    paddingLeft: 20,
+    paddingRight: 20,
   },
-  containerTitle: { paddingTop: 50, marginTop: 50 },
+  containerTitle: { paddingTop: 20, marginTop: 50 },
   title: {
     color: "#80b918",
     fontSize: 28,
@@ -23,7 +28,11 @@ export default StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
   },
-  containerSubTitle: { paddingTop: 30, marginTop: 30 },
+  containerSubTitle: {
+    paddingTop: 30,
+    marginTop: 30,
+    width: "100%",
+  },
   subtitle: { color: "#55A630", fontWeight: "bold" },
   containerImage: {
     marginTop: 10,
@@ -57,7 +66,7 @@ export default StyleSheet.create({
   buttonSecondary: {
     backgroundColor: "#FFF",
     borderColor: "#80b918",
-    borderWidth: 2,
+    borderWidth: 1.5,
   },
   buttonText: {
     color: "#80b918",
@@ -78,5 +87,49 @@ export default StyleSheet.create({
   },
   paragraph: {
     color: "#545454",
+  },
+  subtitleProfile: {
+    color: "#55A630",
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+  containerProfile: {
+    padding: 20,
+    marginTop: 30,
+  },
+  description: {
+    textAlign: "justify",
+    fontStyle: "italic",
+    fontWeight: "700",
+  },
+  image: {
+    width: ITEM_WIDTH,
+    height: 200,
+  },
+  containerCarrusel: {
+    backgroundColor: "white",
+    borderRadius: 8,
+    width: ITEM_WIDTH,
+    paddingBottom: 40,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+  header: {
+    color: "#007F5F",
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingLeft: 20,
+    paddingTop: 10,
+  },
+  body: {
+    color: "#545454",
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 });

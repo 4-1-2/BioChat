@@ -9,6 +9,7 @@ export default function ReportScren({ navigation, route }) {
 
   const [messages, setMessages] = useState([]);
   const onPress = async () => {
+    console.log("chat");
     navigation.navigate("Chat", { message: params.data.question });
   };
   return (
@@ -16,7 +17,13 @@ export default function ReportScren({ navigation, route }) {
       <View style={styles.containerSubTitle}>
         <Text style={styles.title}>{params.data.plant}</Text>
       </View>
-      <View style={{ flexDirection: "row" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "flex-start",
+          marginTop: 20,
+        }}
+      >
         <View style={{ height: 70, paddingRight: 10 }}>
           {params.image && (
             <Image
@@ -26,14 +33,12 @@ export default function ReportScren({ navigation, route }) {
           )}
         </View>
         <View style={styles.paragraphContainer}>
-          <Text style={styles.subtitle}>Dianóstico:</Text>
-          <Text style={styles.paragraph}>
-            Dianóstico: {params.data.diagnosis}
-          </Text>
+          <Text style={styles.subtitle}>Diagnosis:</Text>
+          <Text style={styles.paragraph}>{params.data.diagnosis}</Text>
         </View>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center", padding: 20 }}>
-        <View style={{ flex: 1, height: 2, backgroundColor: "#D9D9D9" }} />
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ flex: 1, height: 2, backgroundColor: "#aacc00" }} />
       </View>
       <View style={styles.containerSend}>
         <TouchableOpacity
@@ -41,7 +46,7 @@ export default function ReportScren({ navigation, route }) {
           style={[styles.button, styles.buttonPrimary]}
         >
           <Text style={[styles.buttonText, styles.textPrimary]}>
-            Iniciar Chat
+            Start chat
           </Text>
         </TouchableOpacity>
       </View>

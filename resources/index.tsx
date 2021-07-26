@@ -1,7 +1,14 @@
 export const sendInfo = async (data) => {
-  const url = "https://api.inresorts.club/api/dashboard/partnerState/12853";
+  const url =
+    "https://getstartedpython-accountable-klipspringer-il.mybluemix.net/diagnosis";
 
-  return await fetch(url)
+  return await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then((res) => res.json())
     .then((response) => {
       return response;
@@ -11,15 +18,23 @@ export const sendInfo = async (data) => {
     });
 };
 
-export const sendChat = async () => {
-  const url = "https://api.inresorts.club/api/TipoPago/listTipoPago";
+export const sendChat = async (data) => {
+  const url =
+    "https://getstartedpython-accountable-klipspringer-il.mybluemix.net/chatbot";
 
-  return await fetch(url)
+  return await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then((res) => res.json())
     .then((response) => {
       return response;
     })
     .catch((error) => {
+      console.log(error);
       return null;
     });
 };
