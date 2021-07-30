@@ -1,4 +1,17 @@
 import React, { useState, useCallback, useEffect } from "react";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  Modal,
+  Alert,
+  Pressable,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { GiftedChat } from "react-native-gifted-chat";
 import { sendChat, sendInfo } from "../../resources";
@@ -10,22 +23,38 @@ export default function ChatScren({ navigation, route }) {
   const { params } = route;
 
   const [messages, setMessages] = useState([]);
-  const [question, setQuestion] = useState(params.message);
+  const [question, setQuestion] = useState(params.message || "");
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: params.message,
-        createdAt: new Date(),
-        user: {
+    if (params.message && params.message.length > 0) {
+      setMessages([
+        {
           _id: 1,
-          name: "BioChat",
-          avatar: BOT_USER,
+          text: params.message,
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: "BioChat",
+            avatar: BOT_USER,
+          },
         },
-      },
-    ]);
-    getChat(params.message);
+      ]);
+      getChat(params.message);
+    } else {
+      setMessages([
+        {
+          _id: new Date().getTime().toString(),
+          text: "Hi, I am BioChat. How can I help you?",
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "BioChat",
+            avatar: BOT_USER,
+          },
+        },
+      ]);
+    }
   }, []);
 
   const getChat = async (message: string) => {
@@ -124,13 +153,37 @@ export default function ChatScren({ navigation, route }) {
     }
   };
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={(messages) => onSend(messages)}
-      onQuickReply={(quickReply) => onQuickReply(quickReply)}
-      user={{
-        _id: 1,
-      }}
-    />
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "transparent" }} />
+      <GiftedChat
+        messages={messages}
+        onSend={(messages) => onSend(messages)}
+        onQuickReply={(quickReply) => onQuickReply(quickReply)}
+        user={{
+          _id: 1,
+        }}
+      />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={true}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </View>
   );
 }

@@ -8,6 +8,7 @@ import MainScren from "./screen/Home/MainScreen";
 import ChatScren from "./screen/Home/ChatScreen";
 import ReportScren from "./screen/Home/ReportScreen";
 import ProfileScren from "./screen/Home/Profile";
+import ExpertScren from "./screen/Home/ExpertScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,15 +17,27 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "Work-Processor", //Set Header Title
+            headerLeft: () => (
+              <NavigationDrawerStructure navigationProps={navigation} />
+            ),
+            headerStyle: {
+              backgroundColor: "#f4511e", //Set Header color
+            },
+            headerTintColor: "#fff", //Set Header text color
+            headerTitleStyle: {
+              fontWeight: "bold", //Set Header text style
+            },
+          }}
+        />
         <Stack.Screen name="Main" component={MainScren} />
-
-        <Stack.Screen name="Chat" component={ChatScren} />
-        <Stack.Screen name="Report" component={ReportScren} />
-        <Stack.Screen name="Profile" component={ProfileScren} />
       </Stack.Navigator>
     </NavigationContainer>
   );

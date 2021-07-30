@@ -6,9 +6,20 @@ import { BOT_GREEN } from "../../assets";
 import styles from "./styles";
 
 export default function HomeScren({ navigation }) {
-  const onPressButton = () => {
+  const onPressChat = () => {
+    navigation.navigate("Chat", {
+      message: "",
+    });
+  };
+
+  const onPressDiagnosis = () => {
     navigation.navigate("Main", { open: true });
   };
+
+  const onPressExperts = () => {
+    navigation.navigate("Experts", { open: true });
+  };
+
   return (
     <View style={styles.containerHome}>
       <View style={styles.imageContainer}>
@@ -16,20 +27,23 @@ export default function HomeScren({ navigation }) {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={onPressButton}
+          onPress={onPressChat}
           style={[styles.button, styles.buttonSecondary]}
         >
-          <Text style={[styles.buttonText, styles.textSecondary]}>Welcome</Text>
+          <Text style={[styles.buttonText, styles.textSecondary]}>BioChat</Text>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity
-          onPress={onPressButton}
+        <TouchableOpacity
+          onPress={onPressDiagnosis}
           style={[styles.button, styles.buttonPrimary]}
         >
-          <Text style={[styles.buttonText, styles.textPrimary]}>
-            Contáctanos
-          </Text>
-        </TouchableOpacity> */}
+          <Text style={[styles.buttonText, styles.textPrimary]}>Diagnosis</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onPressExperts}
+          style={[styles.button, styles.buttonPrimary]}
+        >
+          <Text style={[styles.buttonText, styles.textPrimary]}>Experts</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
