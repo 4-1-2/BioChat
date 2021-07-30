@@ -1,8 +1,8 @@
-export const sendInfo = async (data) => {
+export const sendInfo = (data) => {
   const url =
     "https://getstartedpython-accountable-klipspringer-il.mybluemix.net/diagnosis";
 
-  return await fetch(url, {
+  return fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -18,11 +18,11 @@ export const sendInfo = async (data) => {
     });
 };
 
-export const sendChat = async (data) => {
+export const sendChat = (data) => {
   const url =
     "https://getstartedpython-accountable-klipspringer-il.mybluemix.net/chatbot";
 
-  return await fetch(url, {
+  return fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
