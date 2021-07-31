@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
-import { BOT128 } from "../../assets";
-import styles from "./styles";
+import { BOT128 } from "../../../assets";
+import styles from "../styles";
 
 export default function ReportScren({ navigation, route }) {
   const { params } = route;
@@ -10,7 +10,7 @@ export default function ReportScren({ navigation, route }) {
   const [messages, setMessages] = useState([]);
   const onPress = async () => {
     console.log("chat");
-    navigation.navigate("Chat", { message: params.data.question });
+    navigation.navigate("ChatScreen", { message: params.data.question });
   };
   return (
     <View style={styles.containerChat}>

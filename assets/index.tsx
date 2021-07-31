@@ -12,3 +12,13 @@ export const ORGANIC = require("./images/organic.jpg");
 export const FERTILIZATION = require("./images/fertilization.jpeg");
 export const LOGO_HOR = require("./images/logohorizontal.png");
 export const EXAMPLE = require("./images/example.jpeg");
+
+export const PROFILE1 = require("./profile/profile1.png");
+export const PROFILE2 = require("./profile/profile2.png");
+export const PROFILE3 = require("./profile/profile3.png");
+export const PROFILE4 = require("./profile/profile4.png");
+export const PROFILE5 = require("./profile/profile5.png");
+export const PROFILE6 = require("./profile/profile6.png");
+export const PROFILE7 = require("./profile/profile7.png");
+export const PROFILE8 = require("./profile/profile8.png");
+export const PROFILE9 = require("./profile/profile9.png");

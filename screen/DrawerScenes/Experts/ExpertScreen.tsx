@@ -11,23 +11,86 @@ import {
   StyleSheet,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import { BOT_GREEN } from "../../assets";
-import styles from "./styles";
+import {
+  PROFILE1,
+  PROFILE2,
+  PROFILE3,
+  PROFILE4,
+  PROFILE5,
+  PROFILE6,
+  PROFILE7,
+  PROFILE8,
+  PROFILE9,
+} from "../../../assets";
+import styles from "../../styles";
 
-export default function ExpertScren({ navigation }) {
+export default function ExpertScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const data = [
-    { id: "1", name: "Angelica Antarea", distance: "5 km" },
-    { id: "2", name: "Angelica Antarea", distance: "2 km" },
-    { id: "3", name: "Angelica Antarea", distance: "1 km" },
-    { id: "4", name: "Angelica Antarea", distance: "3 km" },
-    { id: "5", name: "Angelica Antarea", distance: "4 km" },
-    { id: "6", name: "Angelica Antarea", distance: "5 km" },
-    { id: "7", name: "Angelica Antarea", distance: "1.2 km" },
-    { id: "8", name: "Angelica Antarea", distance: "3 km" },
-    { id: "9", name: "Carla Antarea", distance: "7 km" },
+    {
+      id: "1",
+      name: "Angelica Antarea",
+      distance: "5 km",
+      image: PROFILE1,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "2",
+      name: "Angelica Antarea",
+      distance: "2 km",
+      image: PROFILE2,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "3",
+      name: "Angelica Antarea",
+      distance: "1 km",
+      image: PROFILE3,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "4",
+      name: "Angelica Antarea",
+      distance: "3 km",
+      image: PROFILE4,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "5",
+      name: "Angelica Antarea",
+      distance: "4 km",
+      image: PROFILE5,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "6",
+      name: "Angelica Antarea",
+      distance: "5 km",
+      image: PROFILE6,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "7",
+      name: "Angelica Antarea",
+      distance: "1.2 km",
+      image: PROFILE7,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "8",
+      name: "Angelica Antarea",
+      distance: "3 km",
+      image: PROFILE8,
+      specialty: "Healthy plants",
+    },
+    {
+      id: "9",
+      name: "Carla Antarea",
+      distance: "7 km",
+      image: PROFILE9,
+      specialty: "Healthy plants",
+    },
   ];
   const [experts, setExperts] = useState(data);
   const [listFiltered, setListFiltered] = useState(data);
@@ -35,16 +98,43 @@ export default function ExpertScren({ navigation }) {
   const renderItem = ({ item }: any) => {
     return (
       <TouchableOpacity onPress={() => showProfile(item)}>
-        <View key={item.id} style={{ minHeight: 70, padding: 50 }}>
-          <Text>{item.name}</Text>
-          <Text>{item.distance}</Text>
+        <View
+          key={item.id}
+          style={{
+            minHeight: 70,
+            margin: 5,
+            flexDirection: "row",
+            justifyContent: "flex-start",
+          }}
+        >
+          <View
+            style={{
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              marginRight: 10,
+              marginLeft: 10,
+              backgroundColor: "#ffffff",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Image
+              source={item.image}
+              style={{ borderRadius: 30, width: 60, height: 60 }}
+            ></Image>
+          </View>
+          <View style={{ flexDirection: "column" }}>
+            <Text>{item.name}</Text>
+            <Text>{`Specialty: ${item.specialty}`}</Text>
+            <Text>{`Distance: ${item.distance}`}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
   };
 
   const showProfile = (item) => {
-    navigation.navigate("Profile", {
+    navigation.navigate("ProfileExpert", {
       data: {
         name: item.name,
         phone: "1232345",
@@ -69,7 +159,6 @@ export default function ExpertScren({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={{ backgroundColor: "transparent" }} />
       <TextInput
         placeholder="Search"
         placeholderTextColor="#ddd"

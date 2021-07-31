@@ -4,9 +4,10 @@ import { View, Image, TouchableOpacity, Text, Dimensions } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import ImageEditor from "@react-native-community/image-editor";
 
-import { sendInfo } from "../../resources";
-import styles from "./styles";
-import { EXAMPLE, LOGO_HOR, DEFAULT } from "../../assets";
+import { sendInfo } from "../../../resources";
+import styles from "../../styles";
+
+import { EXAMPLE, LOGO_HOR, DEFAULT } from "../../../assets";
 
 declare type ImagePickerResult =
   | {
@@ -27,7 +28,7 @@ declare type ImageInfo = {
   base64?: string;
 };
 
-export default function DiagnosisScren({ navigation, route }) {
+export default function DiagnosisScreen({ navigation, route }) {
   const { params } = route;
   const [image, setImage] = useState(null);
   const [base64, setBase64] = useState("");
@@ -107,7 +108,7 @@ export default function DiagnosisScren({ navigation, route }) {
         diagnosis: response.disease,
         question: response.suggested_question,
       };
-      navigation.navigate("Report", { data, image: image });
+      navigation.navigate("ReportScreen", { data, image: image });
     } else {
       alert("Ocurrió un error.");
     }

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Image, TouchableOpacity, Text, Dimensions } from "react-native";
 import Carousel from "react-native-snap-carousel";
+import { USER_PROFILE, DISEASE, ORGANIC, FERTILIZATION } from "../../../assets";
 
-import styles from "./styles";
-import { USER_PROFILE, DISEASE, ORGANIC, FERTILIZATION } from "../../assets";
+import styles from "../styles";
 
 export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);

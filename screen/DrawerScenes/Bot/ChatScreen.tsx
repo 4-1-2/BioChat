@@ -1,28 +1,24 @@
 import React, { useState, useCallback, useEffect } from "react";
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  StyleSheet,
-  Modal,
-  Alert,
-  Pressable,
-} from "react-native";
+import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ReactNativeTooltipMenu from "react-native-tooltip-menu";
+import PopoverTooltip from "react-native-popover-tooltip";
 
 import { GiftedChat } from "react-native-gifted-chat";
-import { sendChat, sendInfo } from "../../resources";
+import { sendChat, sendInfo } from "../../../resources";
 
-import { BOT_USER } from "../../assets";
-import styles from "./styles";
+import { BOT_USER } from "../../../assets";
+import styles from "../styles";
 
-export default function ChatScren({ navigation, route }) {
+export default function ChatScreen({ navigation, route }) {
   const { params } = route;
 
   const [messages, setMessages] = useState([]);
+  const [suggested, setSuggested] = useState([
+    { name: "Kimberly Aguirre", id: 1 },
+    { name: "Kimberly Aguirre", id: 2 },
+    { name: "Ver más", id: 0 },
+  ]);
   const [question, setQuestion] = useState(params.message || "");
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -63,7 +59,7 @@ export default function ChatScren({ navigation, route }) {
       chat_acumm: "",
     };
     const response = await sendChat(data);
-
+    console.log(response);
     if (response) {
       if (response.answer.toLowerCase() === "unknown") {
         setMessages((previousMessages) =>
@@ -109,13 +105,13 @@ export default function ChatScren({ navigation, route }) {
     }
   };
 
-  const onSend = useCallback((messages = []) => {
-    setQuestion(messages[0].text);
+  const onSend = useCallback((msg = []) => {
+    setQuestion(msg[0].text);
     setMessages((previousMessages) => {
-      return GiftedChat.append(previousMessages, messages);
+      return GiftedChat.append(previousMessages, msg);
     });
 
-    getChat(messages[0].text);
+    getChat(msg[0].text);
   }, []);
 
   const onQuickReply = (quickReply) => {
@@ -152,9 +148,46 @@ export default function ChatScren({ navigation, route }) {
       });
     }
   };
+
+  const handlePressItem = (item: any) => {
+    if (item.id > 0) {
+      console.log(item);
+    } else {
+      navigation.navigate("Experts");
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={{ backgroundColor: "transparent" }} />
+      <PopoverTooltip
+        // ref="tooltip1"
+        buttonComponent={
+          <View
+            style={{
+              width: 200,
+              height: 30,
+              backgroundColor: "#80b918",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 15,
+            }}
+          >
+            <Text>Click me! Suggested experts.</Text>
+          </View>
+        }
+        items={suggested.map((item: any) => {
+          return {
+            label: item.name,
+            onPress: () => {
+              handlePressItem(item);
+            },
+          };
+        })}
+
+        // animationType='timing'
+        // using the default timing animation
+      />
       <GiftedChat
         messages={messages}
         onSend={(messages) => onSend(messages)}
@@ -163,27 +196,6 @@ export default function ChatScren({ navigation, route }) {
           _id: 1,
         }}
       />
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={true}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 }
