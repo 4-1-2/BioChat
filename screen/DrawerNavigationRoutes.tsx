@@ -24,19 +24,20 @@ function homeScreenStack({ navigation }) {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          title: "Home", //Set Header Title
+          title: "Home",
           headerLeft: () => (
             <NavigationDrawerHeader navigationProps={navigation} />
           ),
           headerStyle: {
-            backgroundColor: "#80b918", //Set Header color
+            backgroundColor: "#80b918",
           },
-          headerTintColor: "#fff", //Set Header text color
+          headerTintColor: "#fff",
           headerTitleStyle: {
-            fontWeight: "bold", //Set Header text style
+            fontWeight: "bold",
           },
         }}
       />
+      <Stack.Screen name="ChatHome" component={ChatScren} />
     </Stack.Navigator>
   );
 }
@@ -73,6 +74,13 @@ const diagnosisScreenStack = ({ navigation }) => {
         }}
       />
       <Stack.Screen name="ChatScreen" component={ChatScren} />
+      <Stack.Screen
+        name="ProfileDiagnosis"
+        component={ProfileScreen}
+        options={{
+          title: "Profile",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -86,11 +94,11 @@ const expertScreenStack = ({ navigation }) => {
           <NavigationDrawerHeader navigationProps={navigation} />
         ),
         headerStyle: {
-          backgroundColor: "#80b918", //Set Header color
+          backgroundColor: "#80b918",
         },
-        headerTintColor: "#fff", //Set Header text color
+        headerTintColor: "#fff",
         headerTitleStyle: {
-          fontWeight: "bold", //Set Header text style
+          fontWeight: "bold",
         },
       }}
     >
@@ -105,7 +113,7 @@ const expertScreenStack = ({ navigation }) => {
         name="ProfileExpert"
         component={ProfileScreen}
         options={{
-          title: "Experts",
+          title: "Profile",
         }}
       />
     </Stack.Navigator>

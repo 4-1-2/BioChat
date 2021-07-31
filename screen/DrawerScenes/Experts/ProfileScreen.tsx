@@ -46,7 +46,7 @@ export default function ProfileScren({ navigation, route }) {
       <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
         <View style={{ height: 90, paddingRight: 30 }}>
           <Image
-            source={USER_PROFILE}
+            source={params.data.image ?? USER_PROFILE}
             style={{ width: 90, height: 90, borderRadius: 75 }}
           />
         </View>
@@ -67,9 +67,9 @@ export default function ProfileScren({ navigation, route }) {
         <Text style={[styles.paragraph, styles.description]}>
           {params.data.description}
         </Text>
-        <Text style={[styles.paragraph, styles.description]}>
+        {/* <Text style={[styles.paragraph, styles.description]}>
           {params.data.descriptionAlternative}
-        </Text>
+        </Text> */}
       </View>
       <View
         style={{

@@ -17,7 +17,7 @@ export default function CustomSidebarMenu(props) {
             {"About React".charAt(0)}
           </Text>
         </View>
-        <Text style={stylesSidebar.profileHeaderText}>AboutReact</Text>
+        <Text style={stylesSidebar.profileHeaderText}>Usuario 1</Text>
       </View>
       <View style={stylesSidebar.profileHeaderLine} />
 

@@ -1,14 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { View, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import ReactNativeTooltipMenu from "react-native-tooltip-menu";
 import PopoverTooltip from "react-native-popover-tooltip";
 
 import { GiftedChat } from "react-native-gifted-chat";
 import { sendChat, sendInfo } from "../../../resources";
 
-import { BOT_USER } from "../../../assets";
-import styles from "../styles";
+import { BOT_USER, BOT_USER_ALT, BOT_USER_ALT2 } from "../../../assets";
 
 export default function ChatScreen({ navigation, route }) {
   const { params } = route;
@@ -16,7 +13,7 @@ export default function ChatScreen({ navigation, route }) {
   const [messages, setMessages] = useState([]);
   const [suggested, setSuggested] = useState([
     { name: "Kimberly Aguirre", id: 1 },
-    { name: "Kimberly Aguirre", id: 2 },
+    { name: "Carla Estefany", id: 2 },
     { name: "Ver más", id: 0 },
   ]);
   const [question, setQuestion] = useState(params.message || "");
@@ -32,7 +29,7 @@ export default function ChatScreen({ navigation, route }) {
           user: {
             _id: 1,
             name: "BioChat",
-            avatar: BOT_USER,
+            avatar: BOT_USER_ALT,
           },
         },
       ]);
@@ -46,7 +43,7 @@ export default function ChatScreen({ navigation, route }) {
           user: {
             _id: 2,
             name: "BioChat",
-            avatar: BOT_USER,
+            avatar: BOT_USER_ALT,
           },
         },
       ]);
@@ -71,7 +68,7 @@ export default function ChatScreen({ navigation, route }) {
               user: {
                 _id: 2,
                 name: "BioChat",
-                avatar: BOT_USER,
+                avatar: BOT_USER_ALT,
               },
               quickReplies: {
                 type: "radio", // or 'checkbox',
@@ -96,7 +93,7 @@ export default function ChatScreen({ navigation, route }) {
               user: {
                 _id: 2,
                 name: "BioChat",
-                avatar: BOT_USER,
+                avatar: BOT_USER_ALT,
               },
             },
           ])
@@ -133,7 +130,7 @@ export default function ChatScreen({ navigation, route }) {
     //   return GiftedChat.append(previousMessages, [msg]);
     // });
     if (flag) {
-      navigation.navigate("Profile", {
+      navigation.navigate("ProfileExpert", {
         data: {
           name: "Carla Aguirre Zegarra",
           phone: "1232345",
@@ -151,15 +148,27 @@ export default function ChatScreen({ navigation, route }) {
 
   const handlePressItem = (item: any) => {
     if (item.id > 0) {
-      console.log(item);
+      navigation.navigate("ProfileDiagnosis", {
+        data: {
+          name: item.name,
+          phone: "1232345",
+          distance: "Distance 5 km",
+          direction: "Av. Sol 123 - Cusco",
+          email: "correo@gmail.com",
+          description:
+            "Hello, for 5 years I have been dedicated to the care and production of organic food. At Organic Cusco we provide you with all the necessary information so that your flat has the appropriate ones.",
+          descriptionAlternative:
+            "Te ayudamos con las enfermedades y/o plagas que tu planata pueda tener, nuestras soluciones son ecoamigables.",
+        },
+      });
     } else {
-      navigation.navigate("Experts");
+      navigation.navigate("ExpertHome");
     }
   };
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={{ backgroundColor: "transparent" }} />
+      {/* <SafeAreaView style={{ backgroundColor: "transparent" }} /> */}
       <PopoverTooltip
         // ref="tooltip1"
         buttonComponent={
@@ -167,13 +176,14 @@ export default function ChatScreen({ navigation, route }) {
             style={{
               width: 200,
               height: 30,
-              backgroundColor: "#80b918",
+              backgroundColor: "#f7d24f8a",
               justifyContent: "center",
               alignItems: "center",
               borderRadius: 15,
+              margin: 5,
             }}
           >
-            <Text>Click me! Suggested experts.</Text>
+            <Text style={{ color: "#545454" }}>Suggested experts!</Text>
           </View>
         }
         items={suggested.map((item: any) => {

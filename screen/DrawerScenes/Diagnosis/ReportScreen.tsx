@@ -1,15 +1,12 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 
-import { BOT128 } from "../../../assets";
 import styles from "../styles";
 
 export default function ReportScren({ navigation, route }) {
   const { params } = route;
 
-  const [messages, setMessages] = useState([]);
   const onPress = async () => {
-    console.log("chat");
     navigation.navigate("ChatScreen", { message: params.data.question });
   };
   return (

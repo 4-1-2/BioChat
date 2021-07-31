@@ -29,8 +29,7 @@ export default StyleSheet.create({
     paddingLeft: 15,
   },
   containerSubTitle: {
-    paddingTop: 30,
-    marginTop: 30,
+    paddingTop: 10,
     width: "100%",
   },
   subtitle: { color: "#55A630", fontWeight: "bold" },
@@ -49,6 +48,8 @@ export default StyleSheet.create({
   },
   imageContainer: {
     justifyContent: "center",
+    alignItems: "center",
+    width: "90%",
   },
   buttonContainer: {
     margin: 10,

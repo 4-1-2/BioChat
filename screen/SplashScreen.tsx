@@ -1,14 +1,5 @@
-import { StackScreenProps } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-  Dimensions,
-  ActivityIndicator,
-} from "react-native";
+import { View, Image, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { BOT_WHITE } from "../assets";
@@ -48,7 +39,6 @@ export default function SplashScreen({ navigation }) {
         }}
       >
         <Image source={BOT_WHITE} width={64} />
-        {/* <Text style={styles.title}>Agrobot</Text> */}
         <ActivityIndicator
           animating={animating}
           color="#FFFFFF"

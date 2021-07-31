@@ -13,7 +13,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
   },
   container: {
     flex: 1,
@@ -25,7 +25,12 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  containerTitle: { paddingTop: 20, marginTop: 50 },
+  containerTitle: {
+    paddingTop: 30,
+    paddingLeft: 10,
+    width: "100%",
+    justifyContent: "flex-start",
+  },
   title: {
     color: "#80b918",
     fontSize: 28,
@@ -40,7 +45,7 @@ export default StyleSheet.create({
   },
   subtitle: { color: "#55A630", fontWeight: "bold" },
   containerImage: {
-    marginTop: 10,
+    marginTop: 5,
     justifyContent: "flex-start",
     alignItems: "center",
   },
@@ -49,8 +54,10 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
   containerSend: {
-    alignItems: "flex-end",
+    height: 60,
+    alignItems: "center",
     width: "100%",
+    marginBottom: 10,
   },
   imageContainer: {
     justifyContent: "center",
@@ -69,8 +76,8 @@ export default StyleSheet.create({
   },
   buttonPrimary: { backgroundColor: "#80b918" },
   buttonSecondary: {
-    backgroundColor: "#FFF",
-    borderColor: "#80b918",
+    backgroundColor: "#80b9188a",
+    borderColor: "#80b9188a",
     borderWidth: 1.5,
   },
   buttonText: {
@@ -85,7 +92,7 @@ export default StyleSheet.create({
   },
 
   textSecondary: {
-    color: "#80b918",
+    color: "#fff",
   },
   paragraphContainer: {
     padding: 20,
